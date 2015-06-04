@@ -42,6 +42,6 @@ Command:register{
 	run = function(self, ply, args, flags)
 		local itemStack = luajava.new(ItemStack, args.item, args.amount, args.data)
 		args.target:getInventory():addItem({itemStack})
-		self:sendActionReply(ply, args.target, itemStack:getAmount(), itemStack:getType():name(), itemStack:getDurability())
+		self:sendActionReply(ply, args.target, nil, itemStack:getAmount(), itemStack:getType():name(), itemStack:getDurability())
 	end
 }

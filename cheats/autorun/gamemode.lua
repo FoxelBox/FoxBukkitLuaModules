@@ -32,6 +32,6 @@ Command:register{
 	},
 	run = function(self, ply, args)
 		args.target:setGameMode(args.gamemode)
-		self:sendActionReply(ply, args.target, args.gamemode:name())
+		self:sendActionReply(ply, args.target, nil, args.gamemode:name())
 	end
 }
