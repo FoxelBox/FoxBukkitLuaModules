@@ -4,13 +4,11 @@ local Permission = require("Permission")
 local Material = luajava.bindClass("org.bukkit.Material")
 local ItemStack = luajava.bindClass("org.bukkit.inventory.ItemStack")
 
-local function sendReplyTo(cmd, ply, target, itemStack)
-	ply:sendReply(cmd:referTo(target, ply):ucfirst() .. " gave " .. cmd:referTo(ply, target, true) .. " " .. itemStack:getAmount() .. " of " .. itemStack:getType():name() .. ":" .. itemStack:getDurability())
-end
-
 Command:register{
 	name = "give",
 	aliases = {"i", "item"},
+	actionFormat = "%s gave %s %d of %s:%d",
+	actionIsProperty = false,
 	arguments = {
 		{
 			name = "item",
@@ -42,9 +40,6 @@ Command:register{
 	run = function(self, ply, args, flags)
 		local itemStack = luajava.new(ItemStack, args.item, args.amount, args.data)
 		args.target:getInventory():addItem({itemStack})
-		if args.target ~= ply then
-			sendReplyTo(self, args.target, args.target, itemStack)
-		end
-		sendReplyTo(self, ply, args.target, itemStack)
+		self:sendActionReply(ply, args.target, itemStack:getAmount(), itemStack:getType():name(), itemStack:getDurability())
 	end
 }

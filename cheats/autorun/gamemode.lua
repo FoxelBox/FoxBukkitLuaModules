@@ -6,6 +6,8 @@ local GameMode = luajava.bindClass("org.bukkit.GameMode")
 Command:register{
 	name = "gamemode",
 	aliases = {"gm"}, 
+	actionFormat = "%s set %s gamemode to %s",
+	actionIsProperty = true,
 	arguments = {
 		{
 			name = "gamemode",
@@ -28,5 +30,6 @@ Command:register{
 	},
 	run = function(self, ply, args)
 		args.target:setGameMode(args.gamemode)
+		self:sendActionReply(ply, args.target, args.gamemode:name())
 	end
 }
