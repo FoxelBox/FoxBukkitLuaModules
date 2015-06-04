@@ -3,7 +3,7 @@ local Permission = require("Permission")
 
 local GameMode = luajava.bindClass("org.bukkit.GameMode")
 
-Command:register({
+Command:register{
 	name = "gamemode",
 	aliases = {"gm"}, 
 	arguments = {
@@ -29,4 +29,4 @@ Command:register({
 	run = function(self, ply, args)
 		args.target:setGameMode(args.gamemode)
 	end
-})
+}

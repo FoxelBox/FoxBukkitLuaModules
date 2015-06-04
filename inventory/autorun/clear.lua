@@ -1,6 +1,6 @@
 local Command = require("Command")
 
-Command:register({
+Command:register{
 	name = "clear",
 	run = function(self, ply, args, flags)
 		local inventory = ply:getInventory()
@@ -13,4 +13,4 @@ Command:register({
 		end
 		ply:sendReply("Inventory cleared")
 	end
-})
+}

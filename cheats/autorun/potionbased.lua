@@ -7,7 +7,7 @@ local function makePermanentPotionEffect(type, amp)
 	return luajava.new(PotionEffect, type, 2147483647, amp or 0)
 end
 
-Command:register({
+Command:register{
 	name = "fullbright", 
 	run = function(self, ply, args)
 		ply.fullbright = not ply.fullbright
@@ -17,9 +17,9 @@ Command:register({
 			ply:removePotionEffect(PotionEffectType.NIGHT_VISION)
 		end
 	end
-})
+}
 
-Command:register({
+Command:register{
 	name = "speed",
 	arguments = {
 		{
@@ -36,4 +36,4 @@ Command:register({
 			ply:removePotionEffect(PotionEffectType.SPEED)
 		end
 	end
-})
+}

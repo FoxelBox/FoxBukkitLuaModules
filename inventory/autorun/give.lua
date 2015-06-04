@@ -8,7 +8,7 @@ local function sendReplyTo(cmd, ply, target, itemStack)
 	ply:sendReply(cmd:referTo(target, ply):ucfirst() .. " gave " .. cmd:referTo(ply, target, true) .. " " .. itemStack:getAmount() .. " of " .. itemStack:getType():name() .. ":" .. itemStack:getDurability())
 end
 
-Command:register({
+Command:register{
 	name = "give",
 	aliases = {"i", "item"},
 	arguments = {
@@ -47,4 +47,4 @@ Command:register({
 		end
 		sendReplyTo(self, ply, args.target, itemStack)
 	end
-})
+}
