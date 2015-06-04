@@ -7,8 +7,10 @@ local ItemStack = luajava.bindClass("org.bukkit.inventory.ItemStack")
 Command:register{
 	name = "give",
 	aliases = {"i", "item"},
-	actionFormat = "%s gave %s %d of %s:%d",
-	actionIsProperty = false,
+	action = {
+		format = "%s gave %s %d of %s:%d",
+		isProperty = false
+	},
 	arguments = {
 		{
 			name = "item",
