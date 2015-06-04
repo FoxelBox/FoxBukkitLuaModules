@@ -2,13 +2,11 @@ local Command = require("Command")
 local Player = require("Player")
 local Event = require("Event")
 
-local fixedServerTime = -1
+local fixedServerTime = nil
 
-local function setPlayerFixedTime(ply, time)
-	if not time then
-		return
-	end
-	if time >= 0 then
+local function setPlayerFixedTime(ply)
+	local time = ply.fixedTime or fixedServerTime
+	if time and time >= 0 then
 		if time < 6 then
 			time = time + 18
 		else
@@ -26,7 +24,7 @@ Event:register{
 	ignoreCancelled = true,
 	run = function(self, event)
 		local ply = Player:extend(event:getPlayer())
-		setPlayerFixedTime(ply, ply.fixedTime or fixedServerTime)
+		setPlayerFixedTime(ply)
 	end
 }
 
@@ -50,11 +48,6 @@ Command:register{
 		}
 	},
 	run = function(self, ply, args)
-		local time = args.time
-		if time < 0 then
-			 time = fixedServerTime
-		end
-		setPlayerFixedTime(ply, time)
 		local formatOverride = {}
 		if args.time < 0 then
 			ply.fixedTime = nil
@@ -62,6 +55,7 @@ Command:register{
 		else
 			ply.fixedTime = args.time
 		end
+		setPlayerFixedTime(ply)
 		self:sendActionReply(ply, ply, formatOverride, args.time)
 	end
 }
@@ -88,9 +82,7 @@ Command:register{
 	run = function(self, ply, args)
 		fixedServerTime = args.time
 		for _, ply in pairs(Player:getAll()) do
-			if not ply.fixedTime then
-				setPlayerFixedTime(ply, args.time)
-			end
+			setPlayerFixedTime(ply)
 		end
 		local formatOverride = {}
 		if args.time < 0 then
