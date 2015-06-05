@@ -5,7 +5,7 @@ local Event = require("Event")
 local fixedServerTime = nil
 
 local function setPlayerFixedTime(ply)
-	local time = ply.fixedTime or fixedServerTime
+	local time = ply._fixedTime or fixedServerTime
 	if time and time >= 0 then
 		if time < 6 then
 			time = time + 18
@@ -50,10 +50,10 @@ Command:register{
 	run = function(self, ply, args)
 		local formatOverride = {}
 		if args.time < 0 then
-			ply.fixedTime = nil
+			ply._fixedTime = nil
 			formatOverride.format = "%s reset %s time to server time"
 		else
-			ply.fixedTime = args.time
+			ply._fixedTime = args.time
 		end
 		setPlayerFixedTime(ply)
 		self:sendActionReply(ply, ply, formatOverride, args.time)

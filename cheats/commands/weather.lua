@@ -7,7 +7,7 @@ local WeatherType = bindClass("org.bukkit.WeatherType")
 local fixedServerWeather = nil
 
 local function setPlayerFixedWeather(ply)
-	local weather = ply.fixedWeather or fixedServerWeather
+	local weather = ply._fixedWeather or fixedServerWeather
 	if weather then
 		ply:setPlayerWeather(weather)
 	else
@@ -42,10 +42,10 @@ Command:register{
 	run = function(self, ply, args)
 		local formatOverride = {}
 		if not args.weather then
-			ply.fixedWeather = nil
+			ply._fixedWeather = nil
 			formatOverride.format = "%s reset %s weather to server weather"
 		else
-			ply.fixedWeather = args.weather
+			ply._fixedWeather = args.weather
 		end
 		setPlayerFixedWeather(ply)
 		self:sendActionReply(ply, ply, formatOverride, args.weather and args.weather:name() or "")
