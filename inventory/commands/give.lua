@@ -1,8 +1,8 @@
 local Command = require("Command")
 local Permission = require("Permission")
 
-local Material = luajava.bindClass("org.bukkit.Material")
-local ItemStack = luajava.bindClass("org.bukkit.inventory.ItemStack")
+local Material = bindClass("org.bukkit.Material")
+local ItemStack = bindClass("org.bukkit.inventory.ItemStack")
 
 Command:register{
 	name = "give",

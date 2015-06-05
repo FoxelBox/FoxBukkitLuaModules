@@ -16,8 +16,8 @@ Command:register{
 		}
 	},
 	run = function(self, ply, args)
-		if Permission:getGroupImmunityLevel(args.group) < ply:getImmunityLevel() then
-			Spawnpoint:setGroupSpawn(ply, args.group)
+		if args.group == "default" or Permission:getGroupImmunityLevel(args.group) < ply:getImmunityLevel() then
+			Spawnpoint:setGroupSpawn(args.group, ply:getLocation())
 			self:sendActionReply(ply, nil, {}, args.group)
 		else
 			ply:sendError("Permission denied")

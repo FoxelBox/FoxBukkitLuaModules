@@ -2,7 +2,7 @@ local Command = require("Command")
 local Player = require("Player")
 local Event = require("Event")
 
-local WeatherType = luajava.bindClass("org.bukkit.WeatherType")
+local WeatherType = bindClass("org.bukkit.WeatherType")
 
 local fixedServerWeather = nil
 

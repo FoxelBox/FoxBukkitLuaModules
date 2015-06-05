@@ -1,7 +1,7 @@
 local Command = require("Command")
 local Permission = require("Permission")
 
-local GameMode = luajava.bindClass("org.bukkit.GameMode")
+local GameMode = bindClass("org.bukkit.GameMode")
 
 Command:register{
 	name = "gamemode",

@@ -1,7 +1,7 @@
 local Command = require("Command")
 local Permission = require("Permission")
 
-local Location = luajava.bindClass("org.bukkit.Location")
+local Location = bindClass("org.bukkit.Location")
 
 Command:register{
 	name = "send",

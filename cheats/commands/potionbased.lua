@@ -1,7 +1,7 @@
 local Command = require("Command")
 
-local PotionEffectType = luajava.bindClass("org.bukkit.potion.PotionEffectType")
-local PotionEffect = luajava.bindClass("org.bukkit.potion.PotionEffect")
+local PotionEffectType = bindClass("org.bukkit.potion.PotionEffectType")
+local PotionEffect = bindClass("org.bukkit.potion.PotionEffect")
 
 local function makePermanentPotionEffect(type, amp)	
 	return luajava.new(PotionEffect, type, 2147483647, amp or 0)

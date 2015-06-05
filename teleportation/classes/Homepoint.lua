@@ -16,6 +16,7 @@ local Homepoint = {
 		location = location or ply:getLocation()
 		ply.homepoints = ply.homepoints or {}
 		ply.homepoints[name or "default"] = location
+		ply:__save()
 	end
 }
 
