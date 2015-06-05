@@ -11,7 +11,8 @@ Command:register{
 	arguments = {
 		{
 			name = "group",
-			type = "string"
+			type = "string",
+			required = false
 		}
 	},
 	run = function(self, ply, args)

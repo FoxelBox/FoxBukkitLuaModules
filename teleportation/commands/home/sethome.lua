@@ -10,7 +10,9 @@ Command:register{
 	arguments = {
 		{
 			name = "name",
-			type = "string"
+			type = "string",
+			required = false,
+			default = "default"
 		}
 	},
 	run = function(self, ply, args)

@@ -1,6 +1,6 @@
 local Player = require('Player')
 
-local spawnpoints = {}
+local spawnpoints = require('Persister'):get('spawnpoints')
 
 Spawnpoint = {
 	getGroupSpawn = function(self, group)
