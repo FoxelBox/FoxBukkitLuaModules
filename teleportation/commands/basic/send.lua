@@ -12,7 +12,7 @@ Command:register{
 	arguments = {
 		{
 			name = "from_target",
-			type = "player",
+			type = "players",
 			required = true,
 			immunityRequirement = Permission.immunity.GREATER
 		},
@@ -53,13 +53,17 @@ Command:register{
 			local y = args.z and args.yz or world:getHighestBlockYAt(x, z)
 			
 			local location = luajava.new(Location, world, x, y, z)
-			args.from_target:teleport(location)
+			for _, ply in pairs(args.from_target) do
+				ply:teleport(location)
+			end
 			self:sendActionReply(ply, args.from_target, {
 				format = "%s teleported %s to %d %d %d"
 			}, x, y, z)
 			return
 		end
-		args.from_target:teleport(args.to_target.__entity)
+		for _, ply in pairs(args.from_target) do
+			ply:teleport(args.to_target.__entity)
+		end
 		self:sendActionReply(ply, args.from_target, {}, args.to_target)
 	end
 }
