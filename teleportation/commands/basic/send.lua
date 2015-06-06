@@ -53,7 +53,7 @@ Command:register{
 			local y = args.z and args.yz or world:getHighestBlockYAt(x, z)
 			
 			local location = luajava.new(Location, world, x, y, z)
-			for _, ply in pairs(args.from_target) do
+			for _, ply in next, args.from_target do
 				ply:teleport(location)
 			end
 			self:sendActionReply(ply, args.from_target, {
@@ -61,7 +61,7 @@ Command:register{
 			}, x, y, z)
 			return
 		end
-		for _, ply in pairs(args.from_target) do
+		for _, ply in next, args.from_target do
 			ply:teleport(args.to_target.__entity)
 		end
 		self:sendActionReply(ply, args.from_target, {}, args.to_target)
