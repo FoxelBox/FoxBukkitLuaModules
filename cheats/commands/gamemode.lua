@@ -28,7 +28,7 @@ Command:register{
 			type = "player",
 			defaultSelf = true,
 			required = false,
-			immunityRequirement = Permission.immunity.GREATER
+			immunityRequirement = Permission.Immunity.GREATER
 		}
 	},
 	run = function(self, ply, args, flags)

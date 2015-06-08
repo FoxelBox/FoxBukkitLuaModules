@@ -15,7 +15,7 @@ Command:register{
 			type = "player",
 			required = true,
 			flagsForbidden = "c",
-			immunityRequirement = Permission.immunity.GREATER_OR_EQUAL
+			immunityRequirement = Permission.Immunity.GREATER_OR_EQUAL
 		},
 		{
 			name = "x",

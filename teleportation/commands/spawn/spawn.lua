@@ -16,7 +16,7 @@ Command:register{
 		}
 	},
 	run = function(self, ply, args)
-		if not args.group or args.group == "" then
+		if not args.group then
 			ply:teleport(ply:getSpawn())
 			self:sendActionReply(ply, ply, {
 				format = "%s teleported the spawnpoint of %s group",

@@ -12,7 +12,7 @@ Command:register{
 			name = "target",
 			type = "players",
 			required = true,
-			immunityRequirement = Permission.immunity.GREATER
+			immunityRequirement = Permission.Immunity.GREATER
 		}
 	},
 	run = function(self, ply, args, flags)

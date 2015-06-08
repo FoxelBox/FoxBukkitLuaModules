@@ -14,14 +14,14 @@ Command:register{
 			name = "from_target",
 			type = "players",
 			required = true,
-			immunityRequirement = Permission.immunity.GREATER
+			immunityRequirement = Permission.Immunity.GREATER
 		},
 		{
 			name = "to_target",
 			type = "player",
 			required = true,
 			flagsForbidden = "c",
-			immunityRequirement = Permission.immunity.GREATER_OR_EQUAL
+			immunityRequirement = Permission.Immunity.GREATER_OR_EQUAL
 		},
 		{
 			name = "x",
