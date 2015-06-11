@@ -19,7 +19,8 @@ Command:register{
 			aliases = {
 				c = GameMode.CREATIVE,
 				s = GameMode.SURVIVAL,
-				a = GameMode.ADVENTURE
+				a = GameMode.ADVENTURE,
+				spec = GameMode.SPECTATOR
 			},
 			enumIdFunction = GameMode.getByValue
 		},
