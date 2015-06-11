@@ -4,6 +4,10 @@ local Event = require("Event")
 local PotionEffectType = bindClass("org.bukkit.potion.PotionEffectType")
 local PotionEffect = bindClass("org.bukkit.potion.PotionEffect")
 
+local function makePermanentPotionEffect(type, amp)	
+	return luajava.new(PotionEffect, type, 2147483647, amp or 0)
+end
+
 Event:registerReadOnlyPlayerJoin(function(ply)
 	if ply._effects then
 		for type, factor in next, ply._effects do
@@ -15,10 +19,6 @@ Event:registerReadOnlyPlayerJoin(function(ply)
 		end
 	end
 end)
-
-local function makePermanentPotionEffect(type, amp)	
-	return luajava.new(PotionEffect, type, 2147483647, amp or 0)
-end
 
 local function makePotionEffectCommand(name, type)
 	return Command:register{
