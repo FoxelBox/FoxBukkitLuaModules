@@ -33,18 +33,18 @@ Command:register{
 			return
 		end
 
-		local value
+		local property = args.property:lower()
 
 		if property == "location" then
 			warp.location = ply:getLocation()
-			ply:sendActionReply(ply, nil, {
+			self:sendActionReply(ply, nil, {
 				format = "%s moved warp %s"
 			}, warp.name)
 			warp:save()
 			return
 		elseif property == "delete" then
 			warp:delete()
-			ply:sendActionReply(ply, nil, {
+			self:sendActionReply(ply, nil, {
 				format = "%s deleted warp %s"
 			}, warp.name)
 			return
@@ -56,7 +56,6 @@ Command:register{
 		end
 
 		local value = args.value
-		local property = args.property
 		local override = {}
 
 		if property == "addguest" then
@@ -66,7 +65,7 @@ Command:register{
 				return
 			end
 			override = {
-				format = "added guest to warp %s: to warp %s%s"
+				format = "added guest to warp %s: %s%s"
 			}
 			property = ""
 			value = target
@@ -78,7 +77,7 @@ Command:register{
 				return
 			end
 			override = {
-				format = "removed guest from warp %s: to warp %s%s"
+				format = "removed guest from warp %s: %s%s"
 			}
 			property = ""
 			value = target
@@ -107,6 +106,6 @@ Command:register{
 		end
 		warp:save()
 
-		self:sendActionReply(ply, nil, {}, args.name, property, value)
+		self:sendActionReply(ply, nil, {}, warp.name, property, value)
 	end
 }

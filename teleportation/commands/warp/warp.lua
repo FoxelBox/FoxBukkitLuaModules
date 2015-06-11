@@ -28,6 +28,6 @@ Command:register{
 			return
 		end
 		ply:teleport(warp.location)
-		self:sendActionReply(ply, nil, {}, args.name)
+		self:sendActionReply(ply, nil, {}, warp.name)
 	end
 }
