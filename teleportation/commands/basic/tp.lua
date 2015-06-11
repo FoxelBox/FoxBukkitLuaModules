@@ -1,5 +1,6 @@
 local Command = require("Command")
 local Permission = require("Permission")
+local Locationstack = require("Locationstack")
 
 local Location = bindClass("org.bukkit.Location")
 
@@ -47,6 +48,7 @@ Command:register{
 			local y = args.z and args.yz or world:getHighestBlockYAt(x, z)
 			
 			local location = luajava.new(Location, world, x, y, z)
+			Locationstack:add(ply)
 			ply:teleport(location)
 			self:sendActionReply(ply, ply, {
 				format = "%s teleported %s to %d %d %d"

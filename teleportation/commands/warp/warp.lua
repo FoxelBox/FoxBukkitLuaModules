@@ -1,5 +1,6 @@
 local Command = require("Command")
 local Warp = require("Warp")
+local Locationstack = require("Locationstack")
 
 Command:register{
 	name = "warp",
@@ -27,6 +28,7 @@ Command:register{
 			ply:sendError("Permission denied")
 			return
 		end
+		Locationstack:add(ply)
 		ply:teleport(warp.location)
 		self:sendActionReply(ply, nil, {}, warp.name)
 	end

@@ -1,5 +1,6 @@
 local Command = require("Command")
 local Permission = require("Permission")
+local Locationstack = require("Locationstack")
 
 local Location = bindClass("org.bukkit.Location")
 
@@ -54,6 +55,7 @@ Command:register{
 			
 			local location = luajava.new(Location, world, x, y, z)
 			for _, ply in next, args.from_target do
+				Locationstack:add(ply)
 				ply:teleport(location)
 			end
 			self:sendActionReply(ply, args.from_target, {
@@ -62,6 +64,7 @@ Command:register{
 			return
 		end
 		for _, ply in next, args.from_target do
+			Locationstack:add(ply)
 			ply:teleport(args.to_target.__entity)
 		end
 		self:sendActionReply(ply, args.from_target, {}, args.to_target)

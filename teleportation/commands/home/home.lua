@@ -1,4 +1,5 @@
 local Command = require("Command")
+local Locationstack = require("Locationstack")
 require("Homepoint")
 
 Command:register{
@@ -21,6 +22,7 @@ Command:register{
 			ply:sendError("Home not found")
 			return
 		end
+		Locationstack:add(ply)
 		ply:teleport(home)
 		self:sendActionReply(ply, ply, {}, args.name)
 	end

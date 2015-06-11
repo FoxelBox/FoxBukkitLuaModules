@@ -1,5 +1,6 @@
 local Command = require("Command")
 local Permission = require("Permission")
+local Locationstack = require("Locationstack")
 
 Command:register{
 	name = "summon",
@@ -17,6 +18,7 @@ Command:register{
 	},
 	run = function(self, ply, args, flags)
 		for _, target in next, args.target do
+			Locationstack:add(target)
 			target:teleport(ply.__entity)
 		end
 		self:sendActionReply(ply, args.target, {})
