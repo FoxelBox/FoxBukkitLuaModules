@@ -40,9 +40,9 @@ Command:register{
 	run = function(self, ply, args)
 		local enabled = args.enabled
 		if enabled == nil then
-			enabled = not ply._godModeEnabled
+			enabled = not args.target._godModeEnabled
 		end
-		ply._godModeEnabled = enabled
+		args.target._godModeEnabled = enabled
 		self:sendActionReply(ply, args.target, {}, enabled and "enabled" or "disabled")
 	end
 }
