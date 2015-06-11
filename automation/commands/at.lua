@@ -11,5 +11,6 @@ Command:register{
 		Server:runOnMainThread(function()
 			ply:chat(args)
 		end, time * 20)
+		ply:sendReply("Command scheduled")
 	end
 }

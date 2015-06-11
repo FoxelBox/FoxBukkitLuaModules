@@ -16,5 +16,6 @@ Command:register{
 		for _, target in next, targets do
 			target:chat(args)
 		end
+		ply:sendReply("Cexec dispatched")
 	end
 }
