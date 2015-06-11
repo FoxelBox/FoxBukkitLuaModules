@@ -18,15 +18,7 @@ local function setPlayerFixedTime(ply)
 	end	
 end
 
-Event:register{
-	class = "org.bukkit.event.player.PlayerJoinEvent",
-	priority = Event.Priority.MONITOR,
-	ignoreCancelled = true,
-	run = function(self, event)
-		local ply = Player:extend(event:getPlayer())
-		setPlayerFixedTime(ply)
-	end
-}
+Event:registerReadOnlyPlayerJoin(setPlayerFixedTime)
 
 Command:register{
 	name = "time",

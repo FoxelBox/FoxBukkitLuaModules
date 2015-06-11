@@ -4,23 +4,17 @@ local Event = require("Event")
 local PotionEffectType = bindClass("org.bukkit.potion.PotionEffectType")
 local PotionEffect = bindClass("org.bukkit.potion.PotionEffect")
 
-Event:register{
-	class = "org.bukkit.event.player.PlayerJoinEvent",
-	priority = Event.Priority.MONITOR,
-	ignoreCancelled = true,
-	run = function(self, event)
-		local ply = Player:extend(event:getPlayer())
-		if ply._effects then
-			for type, factor in next, ply._effects do
-				if factor and factor > 0 then
-					ply:addPotionEffect(makePermanentPotionEffect(type, factor), true)
-				else
-					ply:removePotionEffect(type)
-				end
+Event:registerReadOnlyPlayerJoin(function(ply)
+	if ply._effects then
+		for type, factor in next, ply._effects do
+			if factor and factor > 0 then
+				ply:addPotionEffect(makePermanentPotionEffect(type, factor), true)
+			else
+				ply:removePotionEffect(type)
 			end
 		end
 	end
-}
+end)
 
 local function makePermanentPotionEffect(type, amp)	
 	return luajava.new(PotionEffect, type, 2147483647, amp or 0)

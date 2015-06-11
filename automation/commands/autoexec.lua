@@ -9,19 +9,13 @@ local table_insert = table.insert
 local tonumber = tonumber
 local next = next
 
-Event:register{
-	class = "org.bukkit.event.player.PlayerJoinEvent",
-	priority = Event.Priority.MONITOR,
-	ignoreCancelled = true,
-	run = function(self, event)
-		local ply = Player:extend(event:getPlayer())
-		if ply.autoexec then
-			for _, cmd in next, ply.autoexec do
-				ply:chat(cmd)
-			end
+Event:registerReadOnlyPlayerJoin(function(ply)
+	if ply.autoexec then
+		for _, cmd in next, ply.autoexec do
+			ply:chat(cmd)
 		end
 	end
-}
+end)
 
 Command:register{
 	name = "autoexec",

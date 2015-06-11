@@ -15,15 +15,7 @@ local function setPlayerFixedWeather(ply)
 	end	
 end
 
-Event:register{
-	class = "org.bukkit.event.player.PlayerJoinEvent",
-	priority = Event.Priority.MONITOR,
-	ignoreCancelled = true,
-	run = function(self, event)
-		local ply = Player:extend(event:getPlayer())
-		setPlayerFixedWeather(ply)
-	end
-}
+Event:registerReadOnlyPlayerJoin(setPlayerFixedWeather)
 
 Command:register{
 	name = "weather",
