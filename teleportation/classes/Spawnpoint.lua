@@ -11,11 +11,11 @@ Spawnpoint = {
 		if not group then
 			group = ply:getGroup() or "guest"
 		end
-		local spawn = self:getGroupSpawn(group)
-		if not noBedSpawn and not spawn then
+		local spawn
+		if not noBedSpawn then
 			spawn = ply:getBedSpawnLocation()
 		end
-		return spawn or ply:getWorld():getSpawnLocation()
+		return spawn or self:getGroupSpawn(group) or ply:getWorld():getSpawnLocation()
 	end,
 
 	setGroupSpawn = function(self, group, location)

@@ -26,7 +26,7 @@ Command:register{
 			})
 		elseif Permission:getGroupImmunityLevel(args.group) <= ply:getImmunityLevel() then
 			Locationstack:add(ply)
-			ply:teleport(Spawnpoint:getPlayerSpawn(ply, args.group, ply:getLocation()))
+			ply:teleport(Spawnpoint:getPlayerSpawn(ply, args.group))
 			self:sendActionReply(ply, nil, {}, args.group)
 		else
 			ply:sendError("Permission denied")

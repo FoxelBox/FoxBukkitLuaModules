@@ -12,6 +12,10 @@ local Homepoint = {
 		return ply.homepoints or {}
 	end,
 
+	clearPlayerHomes = function(self, ply)
+		ply.homepoints = nil
+	end,
+
 	setPlayerHome = function(self, ply, name, location)
 		location = location or ply:getLocation()
 		ply.homepoints = ply.homepoints or {}
@@ -27,6 +31,10 @@ Player:addExtensions{
 
 	getHomes = function(self)
 		return Homepoint:getPlayerHomes(self)
+	end,
+
+	clearHomes = function(self)
+		return Homepoint:clearPlayerHomes(self)
 	end,
 	
 	setHome = function(self, name, location)
