@@ -1,10 +1,16 @@
 local Command = require("Command")
 local Server = require("Server")
 
+local function sendMultilineReply(ply, reply)
+	for line in reply:gmatch('[^\n]+') do
+		ply:sendReply(line)
+	end
+end
+
 Command:register{
-	name = "help",
+	name = "fbhelp",
 	permission = "foxbukkit.help",
-	args = {
+	arguments = {
 		{
 			name = "command",
 			type = "string",
@@ -18,8 +24,8 @@ Command:register{
 				ply:sendError("Command not found")
 				return
 			end
-			ply:sendReply(info:get("help") or "No help text available")
-			ply:sendReply(info:get("usage") or "No usage text available")
+			sendMultilineReply(ply, info:get("help") or "No help text available")
+			sendMultilineReply(ply, info:get("usage") or "No usage text available")
 			return
 		end
 
@@ -34,5 +40,6 @@ Command:register{
 			end
 		end
 		ply:sendReply("Commands: " .. table.concat(displayedCmds, ", "))
+		return false
 	end
 }
