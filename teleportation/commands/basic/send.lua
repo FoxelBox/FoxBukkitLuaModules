@@ -10,6 +10,7 @@ Command:register{
 		format = "%s teleported %s to %s",
 		isProperty = false
 	},
+	permissionOther = false,
 	arguments = {
 		{
 			name = "from_target",

@@ -8,6 +8,7 @@ Command:register{
 		format = "%s summoned %s",
 		isProperty = false
 	},
+	permissionOther = false,
 	arguments = {
 		{
 			name = "target",

@@ -33,6 +33,10 @@ Command:register{
 		}
 	},
 	run = function(self, ply, args, flags)
+		if not ply:hasPermission(self.permission .. "." .. args.gamemode:name():lower()) then
+			ply:sendError("Permission denied")
+			return
+		end
 		args.target:setGameMode(args.gamemode)
 		self:sendActionReply(ply, args.target, {
 			silent = flags:contains("s")

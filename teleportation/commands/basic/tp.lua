@@ -10,6 +10,7 @@ Command:register{
 		format = "%s teleported to %s",
 		isProperty = false
 	},
+	permissionOther = false,
 	arguments = {
 		{
 			name = "target",
@@ -40,6 +41,11 @@ Command:register{
 	},
 	run = function(self, ply, args, flags)
 		if flags:contains("c") then
+			if not ply:hasPermission(self.permission .. ".coords") then
+				ply:sendError("Permission denied")
+				return
+			end
+
 			local world = ply:getWorld()
 			
 			local x = args.x
