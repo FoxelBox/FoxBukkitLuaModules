@@ -18,7 +18,7 @@ Command:register{
 	run = function(self, ply, args, flags)
 		if args.group == "default" or Permission:getGroupImmunityLevel(args.group) < ply:getImmunityLevel() then
 			local location = nil
-			if not flags:has("d") then
+			if not flags:contains("d") then
 				location = ply:getLocation()
 			end
 			Spawnpoint:setGroupSpawn(args.group, location)
