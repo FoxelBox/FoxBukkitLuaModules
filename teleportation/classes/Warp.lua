@@ -36,8 +36,17 @@ local _warp_mt = {
 
 	canModify = function(self, ply)
 		return ply:getUniqueId() == self.owner or
+				self.ops[ply:getUniqueId()] or
 				(ply:hasPermission("foxbukkit.teleportation.warp.override.modify") and
 				 ply:fitsImmunityRequirement(self.owner, Permission.Immunity.GREATER))
+	end,
+
+	addOp = function(self, ply)
+		self.ops[ply:getUniqueId()] = true
+	end,
+
+	removeOp = function(self, ply)
+		self.ops[ply:getUniqueId()] = nil
 	end,
 
 	addGuest = function(self, ply)
@@ -74,6 +83,7 @@ Warp = {
 			location = ply:getLocation(),
 			name = name,
 			guests = {},
+			ops = {},
 			permission = "",
 			mode = Warp.Mode.PRIVATE
 		}, _warp_mt)

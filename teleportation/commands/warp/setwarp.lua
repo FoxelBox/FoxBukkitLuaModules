@@ -82,6 +82,30 @@ Command:register{
 			property = ""
 			value = target
 			warp:removeGuest(target)
+		elseif property == "addop" then
+			local target = Player:findSingle(Player.constraints.matchName(value))
+			if not target then
+				ply:sendError("Player not found")
+				return
+			end
+			override = {
+				format = "added op to warp %s: %s%s"
+			}
+			property = ""
+			value = target
+			warp:addOp(target)
+		elseif property == "removeop" then
+			local target = Player:findSingle(Player.constraints.matchName(value))
+			if not target then
+				ply:sendError("Player not found")
+				return
+			end
+			override = {
+				format = "removed op from warp %s: %s%s"
+			}
+			property = ""
+			value = target
+			warp:removeOp(target)
 		elseif property == "owner" then
 			local target = Player:findSingle(Player.constraints.matchName(value))
 			if not target then
