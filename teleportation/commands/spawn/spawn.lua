@@ -19,7 +19,7 @@ Command:register{
 	run = function(self, ply, args)
 		if not args.group then
 			Locationstack:add(ply)
-			ply:teleport(ply:getSpawn())
+			ply:teleportToSpawn()
 			self:sendActionReply(ply, ply, {
 				format = "%s teleported the spawnpoint of %s group",
 				isProperty = true
