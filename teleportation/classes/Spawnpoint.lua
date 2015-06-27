@@ -1,4 +1,5 @@
 local Player = require('Player')
+local Event = require('Event')
 
 local spawnpoints = require('Persister'):get('spawnpoints')
 
@@ -27,9 +28,25 @@ Spawnpoint = {
 	end
 }
 
+Event:register{
+	class = "org.bukkit.event.player.PlayerRespawnEvent",
+	priority = Event.Priority.NORMAL,
+	ignoreCancelled = true,
+	run = function(self, event)
+		event:setRespawnLocation(Player:extend(event:getPlayer()):getSpawn())
+	end
+}
+
+Event:registerReadOnlyPlayerJoin(function(ply)
+	ply:teleportToSpawn()
+end)
+
 Player:addExtensions{
 	getSpawn = function(self)
 		return Spawnpoint:getPlayerSpawn(self)
+	end,
+	teleportToSpawn = function(self)
+		return self:teleport(self:getSpawn())
 	end
 }
 
