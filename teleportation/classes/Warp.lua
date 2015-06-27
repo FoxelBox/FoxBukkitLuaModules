@@ -103,7 +103,7 @@ Warp = {
 	end,
 
 	getAll = function(self)
-		return warps
+		return warps.__value
 	end,
 
 	Mode = WarpMode
