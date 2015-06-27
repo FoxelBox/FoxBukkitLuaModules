@@ -6,7 +6,7 @@ local warps = require('Persister'):get('warps')
 local WarpMode = {
 	PRIVATE = 1,
 	PUBLIC = 2,
-	PERMISSION = 3	
+	PERMISSION = 3
 }
 
 local Warp
@@ -79,6 +79,9 @@ for k, v in pairs(warps.__value) do
 	if not v.permission then
 		v.permission = ""
 	end
+	if not v.hidden then
+		v.hidden = false
+	end
 	warps.__value[k] = setmetatable(v, _warp_mt)
 end
 
@@ -94,6 +97,7 @@ Warp = {
 			name = name,
 			guests = {},
 			ops = {},
+			hidden = false,
 			permission = "",
 			mode = Warp.Mode.PRIVATE
 		}, _warp_mt)

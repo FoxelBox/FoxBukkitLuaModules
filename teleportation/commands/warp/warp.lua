@@ -18,7 +18,7 @@ Command:register{
 		if not args.name then
 			local warpNames = {}
 			for _, warp in pairs(Warp:getAll()) do
-				if warp:isAllowed(ply) then
+				if not warp.hidden and warp:isAllowed(ply) then
 					table.insert(warpNames, warp.name)
 				end
 			end

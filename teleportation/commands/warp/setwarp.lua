@@ -2,6 +2,26 @@ local Command = require("Command")
 local Player = require("Player")
 local Warp = require("Warp")
 
+local BOOL_VALUES = {
+    ["false"] = false,
+    ["0"] = false,
+    ["no"] = false,
+    ["n"] = false,
+    ["off"] = false,
+    ["disabled"] = false,
+    ["disable"] = false,
+
+    ["true"] = true,
+    ["1"] = true,
+    ["yes"] = true,
+    ["y"] = true,
+    ["on"] = true,
+    ["enabled"] = true,
+    ["enable"] = true,
+
+    [""] = false
+}
+
 Command:register{
 	name = "setwarp",
 	action = {
@@ -116,6 +136,8 @@ Command:register{
 			warp.owner = target
 		elseif property == "permission" then
 			warp.permission = value
+		elseif property == "hidden" then
+			warp.hidden = BOOL_VALUES[value:lower()] or false
 		elseif property == "mode" then
 			local mode = Warp.Mode[value:upper()]
 			if not mode then
