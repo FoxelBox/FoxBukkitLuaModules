@@ -157,6 +157,6 @@ Command:register{
 		end
 		warp:save()
 
-		self:sendActionReply(ply, nil, {}, warp.name, property, value)
+		self:sendActionReply(ply, nil, override, warp.name, property, value)
 	end
 }
