@@ -38,7 +38,11 @@ Event:register{
 }
 
 Event:registerReadOnlyPlayerJoin(function(ply)
-	if not ply:hasPlayedBefore() then
+	local hasPlayedBefore = ply.hasPlayedBefore
+	if type(hasPlayedBefore) ~= "boolean" then
+		hasPlayedBefore = hasPlayedBefore(ply)
+	end
+	if not hasPlayedBefore then
 		ply:teleportToSpawn()
 	end
 end)

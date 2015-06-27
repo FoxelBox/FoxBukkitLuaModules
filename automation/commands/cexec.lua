@@ -7,7 +7,9 @@ local table_concat = table.concat
 Command:register{
 	name = "cexec",
 	run = function(self, ply, args)
-		local targets = Player:find(args[1], nil, PermissionImmunityGREATER, ply, nil, true)
+		local targets = Player:findSingle(self.makePlayerFindConstraint({
+			immunityRequirement = PermissionImmunityGREATER
+		}, args[1], ply, self))
 		if #targets < 1 then
 			ply:sendError("No appropriate target found")
 			return

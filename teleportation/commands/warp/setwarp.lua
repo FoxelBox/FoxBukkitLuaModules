@@ -59,7 +59,7 @@ Command:register{
 		local override = {}
 
 		if property == "addguest" then
-			local target = Player:findSingle(value)
+			local target = Player:findSingle(Player.constraints.matchName(value))
 			if not target then
 				ply:sendError("Player not found")
 				return
@@ -71,7 +71,7 @@ Command:register{
 			value = target
 			warp:addGuest(target)
 		elseif property == "removeguest" then
-			local target = Player:findSingle(value)
+			local target = Player:findSingle(Player.constraints.matchName(value))
 			if not target then
 				ply:sendError("Player not found")
 				return
@@ -83,7 +83,7 @@ Command:register{
 			value = target
 			warp:removeGuest(target)
 		elseif property == "owner" then
-			local target = Player:findSingle(value)
+			local target = Player:findSingle(Player.constraints.matchName(value))
 			if not target then
 				ply:sendError("Player not found")
 				return
