@@ -15,7 +15,7 @@ Command:register{
 			type = "string"
 		}
 	},
-	run = function(self, ply, args)
+	run = function(self, ply, args, flags)
 		if args.group == "default" or Permission:getGroupImmunityLevel(args.group) < ply:getImmunityLevel() then
 			local location = nil
 			if not flags:has("d") then
