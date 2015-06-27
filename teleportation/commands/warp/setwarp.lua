@@ -137,7 +137,12 @@ Command:register{
 		elseif property == "permission" then
 			warp.permission = value
 		elseif property == "hidden" then
-			warp.hidden = BOOL_VALUES[value:lower()] or false
+			local hidden = BOOL_VALUES[value:lower()]
+			if hidden == nil then
+				ply:sendError("No bool-y expression!")
+				return
+			end
+			warp.hidden = hidden
 		elseif property == "mode" then
 			local mode = Warp.Mode[value:upper()]
 			if not mode then
