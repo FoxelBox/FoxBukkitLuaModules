@@ -16,7 +16,13 @@ Command:register{
 	},
 	run = function(self, ply, args)
 		if not args.name then
-			--TODO: LIST
+			local warpNames = {}
+			for _, warp in pairs(Warp:getAll()) do
+				if warp:isAllowed(ply) then
+					table.insert(warpNames, warp.name)
+				end
+			end
+			ply:sendReply("Warps for you: " .. table.concat(warpNames, ", "))
 			return
 		end
 		local warp = Warp:get(args.name)
