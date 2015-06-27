@@ -15,8 +15,14 @@ Command:register{
 			default = "default"
 		}
 	},
-	run = function(self, ply, args)
-		ply:setHome(args.name, ply:getLocation())
-		self:sendActionReply(ply, ply, {}, args.name)
+	run = function(self, ply, args, flags)
+		local overrides = {}
+		if(flags:contains("d")) then
+			overrides.format = "%s deleted %s home point %s"
+			ply:setHome(args.name, nil)
+		else
+			ply:setHome(args.name, ply:getLocation())
+		end
+		self:sendActionReply(ply, ply, overrides, args.name)
 	end
 }

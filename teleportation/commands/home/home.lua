@@ -13,10 +13,19 @@ Command:register{
 			name = "name",
 			type = "string",
 			required = false,
-			default = "default"
+			default = "default",
+			flagsForbidden = "l"
 		}
 	},
-	run = function(self, ply, args)
+	run = function(self, ply, args, flags)
+		if flags:contains("l") then
+			local homeNames = {}
+			for k, _ in pairs(ply:getHomes()) do
+				table.insert(homeNames, k)
+			end
+			ply:sendReply("Homes: " .. table.concat(homeNames, ", "))
+			return
+		end
 		local home = ply:getHome(args.name)
 		if not home then
 			ply:sendError("Home not found")
