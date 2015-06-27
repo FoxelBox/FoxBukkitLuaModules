@@ -1,4 +1,5 @@
 local Player = require('Player')
+local Permission = require('Permission')
 
 local warps = require('Persister'):get('warps')
 
