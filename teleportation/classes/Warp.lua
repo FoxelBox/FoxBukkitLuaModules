@@ -70,9 +70,14 @@ local _warp_mt = {
 _warp_mt.__index = _warp_mt
 
 for k, v in pairs(warps.__value) do
+	if not v.guests then
+		v.guests = {}
+	end
 	if not v.ops then
-		print('Adding ops to warp ' .. v.name)
 		v.ops = {}
+	end
+	if not v.permission then
+		v.permission = ""
 	end
 	warps.__value[k] = setmetatable(v, _warp_mt)
 end
