@@ -38,7 +38,9 @@ Event:register{
 }
 
 Event:registerReadOnlyPlayerJoin(function(ply)
-	ply:teleportToSpawn()
+	if not ply:hasPlayedBefore() then
+		ply:teleportToSpawn()
+	end
 end)
 
 Player:addExtensions{
