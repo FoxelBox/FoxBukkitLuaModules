@@ -66,7 +66,7 @@ Command:register{
 		end
 		for _, ply in next, args.from_target do
 			Locationstack:add(ply)
-			ply:teleport(args.to_target.__entity)
+			ply:teleport(args.to_target)
 		end
 		self:sendActionReply(ply, args.from_target, {}, args.to_target)
 	end

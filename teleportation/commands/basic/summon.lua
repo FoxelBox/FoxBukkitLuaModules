@@ -20,7 +20,7 @@ Command:register{
 	run = function(self, ply, args, flags)
 		for _, target in next, args.target do
 			Locationstack:add(target)
-			target:teleport(ply.__entity)
+			target:teleport(ply)
 		end
 		self:sendActionReply(ply, args.target, {})
 	end
