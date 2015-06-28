@@ -2,26 +2,6 @@ local Command = require("Command")
 local Player = require("Player")
 local Warp = require("Warp")
 
-local BOOL_VALUES = {
-    ["false"] = false,
-    ["0"] = false,
-    ["no"] = false,
-    ["n"] = false,
-    ["off"] = false,
-    ["disabled"] = false,
-    ["disable"] = false,
-
-    ["true"] = true,
-    ["1"] = true,
-    ["yes"] = true,
-    ["y"] = true,
-    ["on"] = true,
-    ["enabled"] = true,
-    ["enable"] = true,
-
-    [""] = false
-}
-
 Command:register{
 	name = "setwarp",
 	action = {
@@ -137,7 +117,7 @@ Command:register{
 		elseif property == "permission" then
 			warp.permission = value
 		elseif property == "hidden" then
-			local hidden = BOOL_VALUES[value:lower()]
+			local hidden = Command.BOOL_VALUES[value:lower()]
 			if hidden == nil then
 				ply:sendError("No bool-y expression!")
 				return
