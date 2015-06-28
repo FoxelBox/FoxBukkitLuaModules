@@ -64,7 +64,7 @@ Command:register{
 		Locationstack:add(ply)
 		ply:teleport(args.target.__entity)
 		self:sendActionReply(ply, args.target, {
-			silentToTarget = flags:contains("s")
+			silentToTarget = (flags:contains("s") and ply:hasPermission(self.permission .. ".silent")) or not args.target:canSee(ply)
 		})
 	end
 }
