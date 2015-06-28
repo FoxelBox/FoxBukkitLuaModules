@@ -18,7 +18,9 @@ Command:register{
 		if not args.name then
 			local warpNames = {}
 			for _, warp in pairs(Warp:getAll()) do
-				if not warp.hidden and warp:isAllowed(ply) then
+				if warp:canModify(ply) then
+					table.insert(warpNames, '\xC2\xA78@\xC2\xA7f' .. warp.name)
+				elseif not warp.hidden and warp:isAllowed(ply) then
 					table.insert(warpNames, warp.name)
 				end
 			end
