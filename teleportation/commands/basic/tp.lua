@@ -7,7 +7,7 @@ local Location = bindClass("org.bukkit.Location")
 Command:register{
 	name = "tp",
 	action = {
-		format = "%s teleported to %s",
+		format = "%s teleported to %s%s",
 		isProperty = false
 	},
 	permissionOther = false,
@@ -61,10 +61,13 @@ Command:register{
 			}, x, y, z)
 			return
 		end
+
 		Locationstack:add(ply)
 		ply:teleport(args.target)
+		
+		local silent = (flags:contains("s") and ply:hasPermission(self.permission .. ".silent")) or not args.target:canSee(ply)
 		self:sendActionReply(ply, args.target, {
-			silentToTarget = (flags:contains("s") and ply:hasPermission(self.permission .. ".silent")) or not args.target:canSee(ply)
-		})
+			silentToTarget = silent
+		}, silent and " (silent)" or "")
 	end
 }
