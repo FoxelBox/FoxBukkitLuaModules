@@ -8,7 +8,8 @@ Command:register{
 	name = "banish",
 	action = {
 		format = "%s teleported %s to the spawnpoint%s",
-		isProperty = false
+		isProperty = false,
+		broadcast = true
 	},
 	arguments = {
 		{
