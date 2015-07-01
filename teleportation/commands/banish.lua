@@ -26,7 +26,7 @@ Command:register{
 				target:clearHomes()
 				target:setBedSpawnLocation(nil, true)
 			end
-			target:teleport(Spawnpoint:getPlayerSpawn(target, target:getLocation()))
+			target:teleportToSpawn()
 		end
 		self:sendActionReply(ply, args.target, {}, resetHome and " (and reset all homes)" or "")
 	end
