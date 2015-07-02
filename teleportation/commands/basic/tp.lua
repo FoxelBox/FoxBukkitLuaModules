@@ -38,7 +38,7 @@ Command:register{
 			typoe = "string",
 			required = true,
 			flagsRequired = "o"
-		}
+		},
 		{
 			name = "x",
 			type = "number",
