@@ -88,6 +88,7 @@ Command:register{
 			self:sendActionReply(ply, offlinePlayer, {
 				silentToTarget = true
 			}, " (last logout location)")
+			return
 		elseif flags:contains("c") then
 			if not ply:hasPermission(self.permission .. ".coords") then
 				ply:sendError("Permission denied")
