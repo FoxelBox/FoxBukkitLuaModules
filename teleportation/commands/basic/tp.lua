@@ -2,6 +2,7 @@ local Command = require("Command")
 local Permission = require("Permission")
 local Locationstack = require("Locationstack")
 local Chat = require("Chat")
+local Player = require("Player")
 
 local bukkitServer = require("Server"):getBukkitServer()
 
