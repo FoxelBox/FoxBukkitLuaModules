@@ -84,6 +84,7 @@ Command:register{
 				return
 			end
 
+			Locationstack:add(ply)
 			ply:teleport(offlinePlayer.logoutLocation)
 			self:sendActionReply(ply, offlinePlayer, {
 				silentToTarget = true
