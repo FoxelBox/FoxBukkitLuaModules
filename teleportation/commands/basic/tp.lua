@@ -31,7 +31,7 @@ Command:register{
 			name = "target",
 			type = "player",
 			required = true,
-			flagsForbidden = "co",
+			flagsForbidden = "o",
 			immunityRequirement = Permission.Immunity.GREATER_OR_EQUAL
 		},
 		{
@@ -39,25 +39,6 @@ Command:register{
 			typoe = "string",
 			required = true,
 			flagsRequired = "o"
-		},
-		{
-			name = "x",
-			type = "number",
-			required = true,
-			flagsRequired = "c"
-		},
-		{
-			name = "yz",
-			type = "number",
-			required = true,
-			flagsRequired = "c"
-		},
-		{
-			name = "z",
-			type = "number",
-			required = false,
-			default = false,
-			flagsRequired = "c"
 		}
 	},
 	run = function(self, ply, args, flags)
@@ -89,26 +70,6 @@ Command:register{
 			self:sendActionReply(ply, offlinePlayer, {
 				silentToTarget = true
 			}, " (last logout location)")
-			return
-		elseif flags:contains("c") then
-			if not ply:hasPermission(self.permission .. ".coords") then
-				ply:sendError("Permission denied")
-				return
-			end
-
-			local world = ply:getWorld()
-			
-			local x = args.x
-			local z = args.z or args.yz
-
-			local y = args.z and args.yz or world:getHighestBlockYAt(x, z)
-			
-			local location = luajava.new(Location, world, x, y, z)
-			Locationstack:add(ply)
-			ply:teleport(location)
-			self:sendActionReply(ply, ply, {
-				format = "%s teleported %s to %d %d %d"
-			}, x, y, z)
 			return
 		end
 
