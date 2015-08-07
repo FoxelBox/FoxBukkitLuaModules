@@ -5,13 +5,14 @@ local spawnpoints = require('Persister'):get('spawnpoints')
 
 Spawnpoint = {
 	getGroupSpawn = function(self, group)
-		return spawnpoints[group] or spawnpoints.default
+		return spawnpoints[group and group:lower() or "default"] or spawnpoints.default
 	end,
 
 	getPlayerSpawn = function(self, ply, group, noBedSpawn)
 		if not group then
 			group = ply:getGroup() or "guest"
 		end
+		group = group:lower()
 		local spawn
 		if not noBedSpawn then
 			spawn = ply:getBedSpawnLocation()
@@ -20,7 +21,7 @@ Spawnpoint = {
 	end,
 
 	setGroupSpawn = function(self, group, location)
-		spawnpoints[group] = location
+		spawnpoints[group:lower()] = location
 	end,
 
 	getSpawnpoints = function(self)
