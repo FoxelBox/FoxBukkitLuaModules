@@ -5,7 +5,7 @@ local Homepoint = {
 		if not ply.homepoints then
 			return
 		end
-		return ply.homepoints[name or "default"]
+		return ply.homepoints[name and name:lower() or "default"]
 	end,
 
 	getPlayerHomes = function(self, ply)
@@ -18,7 +18,7 @@ local Homepoint = {
 
 	setPlayerHome = function(self, ply, name, location)
 		ply.homepoints = ply.homepoints or {}
-		ply.homepoints[name or "default"] = location
+		ply.homepoints[name and name:lower() or "default"] = location
 		ply:__save()
 	end
 }
