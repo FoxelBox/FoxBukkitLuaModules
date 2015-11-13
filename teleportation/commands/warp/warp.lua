@@ -14,7 +14,7 @@ Command:register{
 			required = false
 		}
 	},
-	run = function(self, ply, args)
+	run = function(self, ply, args, flags)
 		if not args.name then
 			local warpNames = {}
 			for _, warp in pairs(Warp:getAll()) do
