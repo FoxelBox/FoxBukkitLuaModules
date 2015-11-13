@@ -6,6 +6,10 @@ require("Player")
 
 local Location = bindClass("org.bukkit.Location")
 
+local function harmlessLightning(location)
+	location:getWorld():strikeLightningEffect(location)
+end
+
 Command:register{
 	name = "tpc",
 	action = {
@@ -48,10 +52,21 @@ Command:register{
 			ply:sendError("Teleport location is out of bounds. (X: " .. x .. ", Y: " .. y .. ", Z: " .. z .. ")")
 			return
 		end
+
+		local doLightning = flags:contains("l")
+
+		if doLightning then
+			harmlessLightning(ply:getLocation())
+		end
 		
 		local location = luajava.new(Location, world, x, y, z)
 		Locationstack:add(ply)
 		ply:teleport(location)
+
+		if doLightning then
+			harmlessLightning(ply:getLocation())
+		end
+		
 		self:sendActionReply(ply, ply, {}, x, y, z)
 	end
 }

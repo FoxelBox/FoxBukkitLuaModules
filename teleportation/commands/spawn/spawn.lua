@@ -3,6 +3,10 @@ local Permission = require("Permission")
 local Spawnpoint = require("Spawnpoint")
 local Locationstack = require("Locationstack")
 
+local function harmlessLightning(location)
+	location:getWorld():strikeLightningEffect(location)
+end
+
 Command:register{
 	name = "spawn",
 	action = {
@@ -17,6 +21,11 @@ Command:register{
 		}
 	},
 	run = function(self, ply, args)
+		local doLightning = flags:contains("l")
+		if doLightning then
+			harmlessLightning(ply:getLocation())
+		end
+		
 		if not args.group then
 			Locationstack:add(ply)
 			ply:teleportToSpawn()
@@ -30,6 +39,10 @@ Command:register{
 			self:sendActionReply(ply, nil, {}, args.group)
 		else
 			ply:sendError("Permission denied")
+		end
+
+		if doLightning then
+			harmlessLightning(ply:getLocation())
 		end
 	end
 }
