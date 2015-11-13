@@ -20,8 +20,9 @@ Command:register{
 			required = false
 		}
 	},
-	run = function(self, ply, args)
+	run = function(self, ply, args, flags)
 		local doLightning = flags:contains("l")
+		
 		if doLightning then
 			harmlessLightning(ply:getLocation())
 		end
