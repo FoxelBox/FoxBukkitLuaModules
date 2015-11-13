@@ -19,6 +19,10 @@ Event:register{
 
 local Location = bindClass("org.bukkit.Location")
 
+local function harmlessLightning(location)
+	location:getWorld():strikeLightningEffect(location)
+end
+
 Command:register{
 	name = "tp",
 	action = {
@@ -73,8 +77,18 @@ Command:register{
 			return
 		end
 
+		local doLightning = flags:contains("l")
+
+		if doLightning then
+			harmlessLightning(ply:getLocation())
+		end
+
 		Locationstack:add(ply)
 		ply:teleport(args.target)
+
+		if doLightning then
+			harmlessLightning(ply:getLocation())
+		end
 		
 		local silent = (flags:contains("s") and ply:hasPermission(self.permission .. ".silent")) or not args.target:canSee(ply)
 		self:sendActionReply(ply, args.target, {
