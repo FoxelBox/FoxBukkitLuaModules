@@ -5,7 +5,7 @@ local Locationstack = require("Locationstack")
 local Location = bindClass("org.bukkit.Location")
 
 Command:register{
-	name = "send",
+	name = "tpo",
 	action = {
 		format = "%s teleported %s to %s",
 		isProperty = false
