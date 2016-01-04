@@ -24,10 +24,10 @@ Command:register{
 
 
 
-		action = {
-			format = "%s unfroze %s",
-			isProperty = false
-		},
+	action = {
+		format = "%s unfroze %s",
+		isProperty = false
+	},
 
 	arguments = {
 		{
@@ -39,15 +39,13 @@ Command:register{
 	},
 
 	run = function(self, ply, args)
-	local override = {}
+		local override = {}
 
-	if not args.target.frozen then
-		override.format = "%s froze %s"
-	end
+		if not args.target.frozen then
+			override.format = "%s froze %s"
+		end
 		args.target.frozen = not args.target.frozen
 		self:sendActionReply(ply, args.target, override, {})
 	end
 }
 
-
--- Created by Cipher_Crypt :D (With fuckloads of help from Dori)
