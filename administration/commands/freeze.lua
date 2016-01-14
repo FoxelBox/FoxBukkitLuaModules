@@ -20,15 +20,10 @@ Event:register{
 
 Command:register{
 	name = "freeze",
-	aliases = {"unfreeze"},
-
-
-
 	action = {
 		format = "%s unfroze %s",
 		isProperty = false
 	},
-
 	arguments = {
 		{
 			name = "target",
@@ -37,7 +32,6 @@ Command:register{
 			required = true
 		}
 	},
-
 	run = function(self, ply, args)
 		local override = {}
 
