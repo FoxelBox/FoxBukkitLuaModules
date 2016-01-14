@@ -1,24 +1,17 @@
 local Command = require("Command")
 local Spawnpoint = require("Spawnpoint")
 local Player = require("Player")
+local Event = require("Event")
 
-local Location = bindClass("org.bukkit.Location")
 local bukkitServer = require("Server"):getBukkitServer()
 
-local Event = require("Event")
---[[Event:register{
-	class = "org.bukkit.event.player.PlayerChangedWorldEvent",
-	priority = Event.Priority.LOW,
-	ignoreCancelled = true,
-	run = function(self, event)
-		local ply = Player:extend(event:getPlayer())
-		local oldWorld = event:getFrom()
-		local newWorld = ply:getWorld()
-		if oldWorld:equals(newWorld) then
-			return
-		end
-	end
-}]]
+local WORLD_ALIASES = {
+	survival = "world",
+	default = "world",
+	s = "world",
+
+	c = "creative"
+}
 
 Event:register{
 	class = "org.bukkit.event.player.PlayerTeleportEvent",
@@ -52,15 +45,19 @@ Command:register{
 		}
 	},
 	run = function(self, ply, args, flags)
-		local world = ply:getWorld()
+		local worldName = args.world:lower()
+
+		if WORLD_ALIASES[worldName] then
+			worldName = WORLD_ALIASES[worldName]
+		end
 		
-		local newWorld = bukkitServer:getWorld(args.world)
+		local newWorld = bukkitServer:getWorld(worldName)
 		if not newWorld then
 			ply:sendError("Could not find world by name")
 			return
 		end
 
-		if world:equals(newWorld) then
+		if ply:getWorld():equals(newWorld) then
 			ply:sendError("You cannot tp to the world you are currently in")
 			return
 		end
