@@ -37,17 +37,8 @@ Command:register{
 			return
 		end
 
-		local doLightning = flags:contains("l")
-		if doLightning then
-			harmlessLightning(ply:getLocation())
-		end
-
 		Locationstack:add(ply)
 		ply:teleport(warp.location)
-
-		if doLightning then
-			harmlessLightning(ply:getLocation())
-		end
 
 		self:sendActionReply(ply, nil, {}, warp.name)
 	end

@@ -2,10 +2,6 @@ local Command = require("Command")
 local Locationstack = require("Locationstack")
 require("Homepoint")
 
-local function harmlessLightning(location)
-	location:getWorld():strikeLightningEffect(location)
-end
-
 Command:register{
 	name = "home",
 	action = {
@@ -36,18 +32,8 @@ Command:register{
 			return
 		end
 
-		local doLightning = flags:contains("x")
-
-		if doLightning then
-			harmlessLightning(ply:getLocation())
-		end
-
 		Locationstack:add(ply)
 		ply:teleport(home)
-
-		if doLightning then
-			harmlessLightning(ply:getLocation())
-		end
 
 		self:sendActionReply(ply, ply, {}, args.name)
 	end
