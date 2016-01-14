@@ -21,7 +21,7 @@ Command:register{
 			if not flags:contains("d") then
 				location = ply:getLocation()
 			end
-			Spawnpoint:setGroupSpawn(args.group, location)
+			Spawnpoint:setGroupSpawn(args.group, ply:getWorld(), location)
 			self:sendActionReply(ply, nil, {}, args.group)
 		else
 			ply:sendError("Permission denied")

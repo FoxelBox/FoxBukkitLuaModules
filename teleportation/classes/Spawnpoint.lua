@@ -4,11 +4,15 @@ local Event = require('Event')
 local spawnpoints = require('Persister'):get('spawnpoints')
 
 Spawnpoint = {
-	getGroupSpawn = function(self, group)
-		return spawnpoints[group and group:lower() or "default"] or spawnpoints.default
+	getGroupSpawn = function(self, group, world)
+		local worldName = (world and world:getName():lower()) or "world"
+		local worldSpawn = spawnpoints[worldName]
+		if worldSpawn then
+			return worldSpawn[group and group:lower() or "default"] or worldSpawn.default
+		end
 	end,
 
-	getPlayerSpawn = function(self, ply, group, noBedSpawn)
+	getPlayerSpawn = function(self, ply, group, noBedSpawn, world)
 		if not group then
 			group = ply:getGroup() or "guest"
 		end
@@ -17,14 +21,23 @@ Spawnpoint = {
 		if not noBedSpawn then
 			spawn = ply:getBedSpawnLocation()
 		end
-		return spawn or self:getGroupSpawn(group) or ply:getWorld():getSpawnLocation()
+		return spawn or self:getGroupSpawn(group, world or ply:getWorld()) or ply:getWorld():getSpawnLocation()
 	end,
 
-	setGroupSpawn = function(self, group, location)
-		spawnpoints[group:lower()] = location
+	setGroupSpawn = function(self, group, world, location)
+		local worldName = world:getName():lower()
+		local worldSpawn = spawnpoints[worldName]
+		if not worldSpawn then
+			worldSpawn = {}
+		end
+		worldSpawn[group:lower()] = location
+		spawnpoints[worldName] = worldSpawn
 	end,
 
-	getSpawnpoints = function(self)
+	getSpawnpoints = function(self, world)
+		if world then
+			return spawnpoints[world:getName():lower()] or {}
+		end
 		return spawnpoints
 	end
 }
