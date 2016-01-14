@@ -1,5 +1,6 @@
 local Command = require("Command")
 local Spawnpoint = require("Spawnpoint")
+local Player = require("Player")
 
 local Location = bindClass("org.bukkit.Location")
 local bukkitServer = require("Server"):getBukkitServer()
@@ -66,12 +67,19 @@ Command:register{
 
 		local newWorldName = newWorld:getName():lower()
 
+		if not ply:hasPermission("foxbukkit.teleportation.tpw.world." .. newWorldName) then
+			ply:sendError("You cannot tp to that world")
+			return			
+		end
+
 		local newLocation
 		if ply.lastWorldLocations and ply.lastWorldLocations[newWorldName] then
 			newLocation = ply.lastWorldLocations[newWorldName]
 		else
 			newLocation = Spawnpoint:getPlayerSpawn(ply, nil, false, newWorld)
 		end
+
+		ply:teleport(newLocation)
 		
 		self:sendActionReply(ply, ply, {}, newWorld:getName())
 	end
