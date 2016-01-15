@@ -12,7 +12,7 @@ Spawnpoint = {
 		end
 	end,
 
-	getPlayerSpawn = function(self, ply, group, noBedSpawn, world)
+	getPlayerSpawn = function(self, ply, group, noBedSpawn, world, noWorldSpawn)
 		if not group then
 			group = ply:getGroup() or "guest"
 		end
@@ -24,7 +24,14 @@ Spawnpoint = {
 		if not noBedSpawn then
 			spawn = ply:getBedSpawnLocation()
 		end
-		return spawn or self:getGroupSpawn(group, world) or world:getSpawnLocation()
+		if not spawn then
+			spawn = self:getGroupSpawn(group, world)
+		end
+		if not noWorldSpawn then
+			return spawn or world:getSpawnLocation()
+		else
+			return spawn
+		end
 	end,
 
 	setGroupSpawn = function(self, group, world, location)
@@ -50,7 +57,11 @@ Event:register{
 	priority = Event.Priority.NORMAL,
 	ignoreCancelled = true,
 	run = function(self, event)
-		event:setRespawnLocation(Player:extend(event:getPlayer()):getSpawn())
+		local ply = Player:extend(event:getPlayer())
+		local spawn = Spawnpoint:getPlayerSpawn(ply, nil, nil, nil, true)
+		if spawn then
+			event:setRespawnLocation(spawn)
+		end
 	end
 }
 
