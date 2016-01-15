@@ -54,7 +54,7 @@ Spawnpoint = {
 
 Event:register{
 	class = "org.bukkit.event.player.PlayerRespawnEvent",
-	priority = Event.Priority.NORMAL,
+	priority = Event.Priority.HIGH,
 	ignoreCancelled = true,
 	run = function(self, event)
 		local ply = Player:extend(event:getPlayer())
