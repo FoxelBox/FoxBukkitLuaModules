@@ -9,7 +9,7 @@ Event:registerReadOnlyPlayerJoin(function(ply)
 	local admintools = {}
 	local played = ""
 	if not ply.hasPlayedBefore then
-		player = " has not played before."
+		played = " has not played before."
 	end
 	table_insert(admintools, "<color name=\"dark_purple\">(FBAT)</color> " .. ply:getDisplayName() .. played)
 	table_insert(admintools, Chat:makeButton("/who " .. ply:getName(), "Who", "aqua", true, false))
