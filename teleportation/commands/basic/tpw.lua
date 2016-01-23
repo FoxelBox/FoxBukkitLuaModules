@@ -73,7 +73,7 @@ Command:register{
 		if ply.lastWorldLocations and ply.lastWorldLocations[newWorldName] then
 			newLocation = ply.lastWorldLocations[newWorldName]
 		else
-			newLocation = Spawnpoint:getPlayerSpawn(ply, nil, false, newWorld)
+			newLocation = Spawnpoint:getPlayerSpawn(ply, nil, true, newWorld)
 		end
 
 		ply:teleport(newLocation)
