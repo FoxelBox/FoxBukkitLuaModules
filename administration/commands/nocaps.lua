@@ -8,7 +8,6 @@ Event:register{
 	priority = Event.Priority.HIGH,
 	run = function(self, event)
 		local msg = event:getMessage()
-	-- 	ONLY EXTEND PLAYERS FOR event:getPlayer()!!!
 		local ply = Player:extend(event:getPlayer())
 		if ply.nocaps then
 			msg = string.lower(msg)
@@ -46,7 +45,3 @@ Command:register{
 		self:sendActionReply(ply, args.target, override, {})
 	end
 }
-
-
-
--- myString = string.lower(myString)
