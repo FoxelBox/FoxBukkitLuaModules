@@ -18,6 +18,7 @@ Event:register{
 
 Command:register{
 	name = "nocaps",
+
 	action = {
 		format = "%s enabled caps for %s",
 		isProperty = false
@@ -38,7 +39,9 @@ Command:register{
 		if not args.target.nocaps then
 			override.format = "%s disabled caps for %s"
 		end
+		
 		args.target.nocaps = not args.target.nocaps
+		
 		self:sendActionReply(ply, args.target, override, {})
 	end
 }
