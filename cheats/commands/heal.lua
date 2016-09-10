@@ -3,7 +3,7 @@ local Permission = require("Permission")
 
 local next = next
 
-local FOOD_MAX = 15
+local FOOD_MAX = 20
 
 Command:register{
 	name = "feed",
