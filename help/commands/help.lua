@@ -21,7 +21,8 @@ Command:register{
 		if args.command then
 			local info = Command:getInfo(args.command)
 			if not info or not ply:hasPermission(info:get("permission")) then
-				return false
+				ply:sendReply("Command not found")
+				return true
 			end
 			sendMultilineReply(ply, info:get("help") or "No help text available")
 			sendMultilineReply(ply, info:get("usage") or "No usage text available")
@@ -39,6 +40,6 @@ Command:register{
 			end
 		end
 		ply:sendReply("Commands: " .. table.concat(displayedCmds, ", "))
-		return false
+		return true
 	end
 }
